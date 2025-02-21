@@ -129,7 +129,7 @@ services:
       - DB_USER=root # Define o usuário do banco de dados.
       - DB_PASSWORD=passwordroot # Define a senha do banco de dados.
     command: >
-      sh -c "npm install && npm start" # Instala dependências e inicia a API.
+     sh -c "npm install --include=dev && npm install -g nodemon && npm start" # Instala dependências e inicia a API.
 
   web:
     image: php:8.2-apache # Utiliza a imagem do PHP com Apache embutido.
