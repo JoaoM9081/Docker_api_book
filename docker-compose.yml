@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: passwordroot
+      MYSQL_DATABASE: biblioteca
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./api/db/script.sql:/docker-entrypoint-initdb.d/script.sql
+    ports:
+      - "3306:3306"
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  api:
+    image: node:18-slim
+    container_name: node-container
+    working_dir: /home/node/app
+    restart: always
+    volumes:
+      - ./api:/home/node/app
+    ports:
+      - "9001:9001"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=passwordroot
+    command: >
+      sh -c "npm install && npm start"
+
+  web:
+    image: php:8.2-apache
+    container_name: php-container
+    working_dir: /var/www/html
+    restart: always
+    volumes:
+      - ./website:/var/www/html
+    ports:
+      - "8888:80"
+    depends_on:
+      - db
+      - api
+      
+volumes:
+  mysql-data:
