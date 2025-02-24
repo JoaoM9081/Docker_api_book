@@ -7,13 +7,18 @@ Este projeto é uma aplicação de exemplo que utiliza **Docker** e **Docker Com
 
 ## O que é Docker e seus componentes principais?
 
+Docker é uma plataforma que permite criar, distribuir e executar aplicações em containers. Ele facilita a construção de ambientes isolados e portáteis, garantindo que uma aplicação funcione de maneira consistente em diferentes sistemas operacionais e infraestruturas.
+
 ### Imagem Docker
-Uma imagem Docker é um modelo de leitura somente que contém o código-fonte e as dependências de uma aplicação. Imagens podem ser usadas para criar containers, ou seja, instâncias executáveis de uma aplicação.
+
+Uma imagem Docker é um modelo de leitura que contém o código-fonte e as dependências de uma aplicação. Imagens podem ser usadas para criar containers, ou seja, instâncias executáveis de uma aplicação.
 
 ### Container Docker
+
 Um container Docker é uma instância em execução de uma imagem Docker. Ele possui seu próprio sistema de arquivos, rede e processos. Quando você executa o comando `docker compose up -d`, o Docker cria containers a partir das imagens especificadas no arquivo `docker-compose.yml`.
 
 ### Docker Compose
+
 Docker Compose é uma ferramenta que permite definir e rodar aplicações multi-container. Com o arquivo `docker-compose.yml`, podemos configurar os serviços (containers) necessários para o projeto e orquestrar a execução de todos eles com um único comando.
 
 ## Tecnologias usadas
